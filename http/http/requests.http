@@ -1,0 +1,20 @@
+#### Login
+#@token = TU_TOKEN_ACA
+
+### Home / health check
+GET http://127.0.0.1:8000
+
+### Listar categorías
+GET http://127.0.0.1:8000/api/categories
+Accept: application/json
+
+### Registrarse
+POST http://127.0.0.1:8000/api/register
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "Esteban",
+    "email": "juan@gmail.com",
+    "password": 123456789
+}
