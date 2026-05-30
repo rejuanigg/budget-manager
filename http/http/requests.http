@@ -1,20 +1,61 @@
-#### Login
-#@token = TU_TOKEN_ACA
+@baseUrl = http://127.0.0.1:8000
+@token = 2|8Qti91SyVZcyvk81GpUXtigpx66QmPHyoyctXALp6b913b4a
 
 ### Home / health check
-GET http://127.0.0.1:8000
+GET {{baseUrl}}
+Accept: application/json
 
 ### Listar categorías
-GET http://127.0.0.1:8000/api/categories
+GET {{baseUrl}}/api/categories
 Accept: application/json
 
 ### Registrarse
-POST http://127.0.0.1:8000/api/register
+POST {{baseUrl}}/api/register
 Accept: application/json
 Content-Type: application/json
 
 {
     "name": "Esteban",
     "email": "juan@gmail.com",
-    "password": 123456789
+    "password": "123456789",
+    "password_confirmation": "123456789"
 }
+
+### Login
+POST {{baseUrl}}/api/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email" : "juan@gmail.com",
+    "password" : "123456789"
+}
+
+### Crear categoría
+POST {{baseUrl}}/api/categories
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Varios"
+}
+
+### Crear transacción
+POST {{baseUrl}}/api/transactions
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "transaction_date" : "2026-05-29",
+    "detail" : "Gastos Varios",
+    "amount" : 5000,
+    "type" : "income",
+    "category_id" : 1
+}
+
+### Mostrar categorias
+GET {{baseUrl}}/api/transactions
+Authorization: Bearer {{token}}
+

@@ -1,31 +1,28 @@
-[//]: # (Descripción — una línea más técnica y precisa)
-
-[//]: # (Features — lista de lo que puede hacer la app)
-
-[//]: # (Installation — cómo correrlo localmente)
-
-[//]: # (API Endpoints — las rutas principales)
-
-[//]: # (Authentication — mencionar Sanctum)
-
 ## Budget Manager
-Budget Manager is a finance app manager to better user finances.
+Budget Manager is a REST API for personal finance management.
 The app can save the user transactions with their categories.
 
 ### Features
 
-- **Create Transactions** -- The user can create transactions with amount and with a description. 
-- **Authentication** -- Can login and register with their personal data.
+- **Create Transactions** -- Create,update and delete transactions with amount and description. 
+- **Categories** -- Organize users transactions by custom categories
+- **Authentication** -- Users can log in and register using Sanctum.
 
 ### Installation
-You can clone the repository and next install the dependencies with npm install.
+You can clone the repository and next install dependencies:
+- composer install
+- cp .env.example .env
+- php artisan key:generate
+- php artisan migrate
 
-### Api Endpoints
-The api endpoint are /transactions and /categories.
-With /transactions you can create a new transactions.
-With /categories you can create a new category
+### API Endpoints
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /api/transactions | Create a transaction |
+| GET | /api/transactions | List all transactions |
+| POST | /api/categories | Create a category |
+
 
 ### Stack
 - PHP | Laravel
-- Blade
 - Sanctum
