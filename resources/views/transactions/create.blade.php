@@ -48,6 +48,15 @@
         <br>
         <br>
 
+        <label>Tags (opcional, Ctrl o Cmd para elegir varios)</label>
+        <select name="tag_ids[]" multiple>
+            @foreach ($tags as $tag)
+                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+            @endforeach
+        </select>
+        <br>
+        <br>
+
         <button type="submit">Enviar</button>
     </form>
     <br>

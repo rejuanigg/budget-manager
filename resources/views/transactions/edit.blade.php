@@ -47,6 +47,20 @@
                 </option>
             @endforeach
         </select>
+        <br>
+        <br>
+
+        <span>Tags</span>
+        <br>
+        <select name="tag_ids[]" multiple>
+            @foreach ($tags as $tag)
+                <option value="{{ $tag->id }}" @selected($transaction->tags->contains($tag))>
+                    {{ $tag->name }}
+                </option>
+            @endforeach
+        </select>
+        <br>
+        <br>
         <button type="submit">Enviar</button>
     </form>
     <a href="{{route('transactions.index')}}">Volver a la lista</a>

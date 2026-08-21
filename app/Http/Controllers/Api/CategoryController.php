@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Requests\Requests\StoreCategoryRequest;
+use App\Http\Requests\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Services\CategoryService;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
     public function __construct(
-        private CategoryService $service
+        private readonly CategoryService $service
     ){}
 
     public function index(Request $request)
@@ -26,9 +26,9 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
-        $nuevaCategoria = $this->service->store($request->validated(), Auth::id());
+        $newCategory = $this->service->store($request->validated(), Auth::id());
 
-        $resource = new CategoryResource($nuevaCategoria);
+        $resource = new CategoryResource($newCategory);
 
         return $resource->response()->setStatusCode(201);
     }

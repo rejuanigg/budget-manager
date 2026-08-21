@@ -15,6 +15,7 @@
             <th>Monto</th>
             <th>Tipo</th>
             <th>Categoria</th>
+            <th>Tags</th>
             <th>Opciones</th>
         </tr>
         @foreach ($misTransacciones as $item)
@@ -24,6 +25,7 @@
                 <td>{{$item->amount}}</td>
                 <td>{{$item->type}}</td>
                 <td>{{$item->category->name}}</td>
+                <td>{{ $item->tags->pluck('name')->join(', ') }}</td>
                 <td>
                     <form action="{{route('transactions.destroy', $item->id)}}" method="post">
                         @csrf

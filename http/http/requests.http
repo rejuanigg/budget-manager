@@ -1,5 +1,5 @@
 @baseUrl = http://127.0.0.1:8000
-@token = 2|8Qti91SyVZcyvk81GpUXtigpx66QmPHyoyctXALp6b913b4a
+@token = 5|w8mJ3TuRwFQ6BhLtDOANamoSuidTNv55XJXsf6PY3f4e81e3
 
 ### Home / health check
 GET {{baseUrl}}
@@ -8,6 +8,7 @@ Accept: application/json
 ### Listar categorías
 GET {{baseUrl}}/api/categories
 Accept: application/json
+Authorization: Bearer {{token}}
 
 ### Registrarse
 POST {{baseUrl}}/api/register
@@ -16,7 +17,7 @@ Content-Type: application/json
 
 {
     "name": "Esteban",
-    "email": "juan@gmail.com",
+    "email": "perejild@gmail.com",
     "password": "123456789",
     "password_confirmation": "123456789"
 }
@@ -27,8 +28,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "email" : "juan@gmail.com",
-    "password" : "123456789"
+    "email": "juan@gmail.com",
+    "password": "123456789"
 }
 
 ### Crear categoría
@@ -48,14 +49,24 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "transaction_date" : "2026-05-29",
-    "detail" : "Gastos Varios",
-    "amount" : 5000,
-    "type" : "income",
-    "category_id" : 1
+    "transaction_date": "2026-08-22",
+    "detail": "Gastos Varios",
+    "amount": 50123,
+    "type": "income",
+    "category_id": 1,
+    "tag_ids": [1]
 }
 
-### Mostrar categorias
+### Mostrar transacciones
 GET {{baseUrl}}/api/transactions
 Authorization: Bearer {{token}}
 
+### Crear tags
+POST {{baseUrl}}/api/tags
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Tag1"
+}
