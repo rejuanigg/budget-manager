@@ -20,12 +20,19 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tags():BelongsToMany
+    /**
+     * Many-to-many relationship with Tag.
+     * Returns the tags associated with this transaction.
+     * withTimestamps() maintains created_at/updated_at on the pivot table.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
-        public function scopeExpenses (Builder $query): void
+    public function scopeExpenses (Builder $query): void
     {
         $query->where('type', 'expense');
     }

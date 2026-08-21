@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreTransactionRequest;
-use App\Http\Requests\UpdateTransactionRequest;
+use App\Http\Requests\Requests\StoreTransactionRequest;
+use App\Http\Requests\Requests\UpdateTransactionRequest;
+use App\Models\Tag;
 use App\Models\Transaction;
 use App\Services\TransactionService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -25,7 +26,7 @@ class TransactionController extends Controller
 
     public function index(Request $request): View
     {
-        $misTransacciones = $request->user()->transactions()->get();
+        $misTransacciones = $request->user()->transactions()->with(['category', 'tags'])->get();
 
         return view('transactions.list', compact('misTransacciones'));
     }
@@ -36,8 +37,9 @@ class TransactionController extends Controller
     public function create(Request $request): View
     {
         $categorias = $request->user()->categories()->get();
+        $tags = Tag::all();
 
-        return view('transactions.create', compact('categorias'));
+        return view('transactions.create', compact('categorias', 'tags'));
     }
 
     /**
@@ -67,8 +69,10 @@ class TransactionController extends Controller
         abort_if($transaction->user_id !== Auth::id(), 403);
 
         $categories = $request->user()->categories()->get();
+        $tags = Tag::all();
+        $transaction->load('tags');
 
-        return view('transactions.edit', compact( 'transaction', 'categories'));
+        return view('transactions.edit', compact('transaction', 'categories', 'tags'));
 
     }
 

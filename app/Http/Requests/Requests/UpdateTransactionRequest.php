@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -33,6 +33,8 @@ class UpdateTransactionRequest extends FormRequest
                 Rule::exists('categories', 'id')
                 ->where('user_id', $this->user()->id)
             ],
+            'tag_ids' => 'nullable|array',
+            'tag_ids.*' => 'integer|exists:tags,id',
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -32,6 +32,8 @@ class StoreTransactionRequest extends FormRequest
                 'required',
                 Rule::exists('categories', 'id')->where('user_id', $this->user()->id)
             ],
+            'tag_ids' => 'nullable|array',
+            'tag_ids.*' => 'integer|exists:tags,id',
         ];
     }
 }

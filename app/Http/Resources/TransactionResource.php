@@ -20,7 +20,8 @@ class TransactionResource extends JsonResource
             'detail'=>$this->detail,
             'amount'=>$this->amount,
             'type'=>$this->type,
-            'category_id'=>$this->category_id
+            'category_id'=>$this->category_id,
+            'tags' => TagResource::collection($this->whenLoaded('tags')),
         ];
     }
 }

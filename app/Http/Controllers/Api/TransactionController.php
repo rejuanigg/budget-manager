@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Requests\StoreTransactionRequest;
+use App\Http\Requests\Requests\UpdateTransactionRequest;
 use App\Http\Resources\TransactionResource;
-use App\Http\Requests\StoreTransactionRequest;
-use App\Http\Requests\UpdateTransactionRequest;
-use App\Services\TransactionService;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Services\TransactionService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -20,7 +20,7 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
-        $misTransacciones = $request->user()->transactions()->get();
+        $misTransacciones = $request->user()->transactions()->with('tags')->get();
 
         return TransactionResource::collection($misTransacciones);
     }

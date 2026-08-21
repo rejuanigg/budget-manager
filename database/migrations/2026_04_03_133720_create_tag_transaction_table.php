@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tag_transaction', function (Blueprint $table) {
+            // Pivot table for the many-to-many relationship between tags and transactions.
+            // Contains foreign keys to tags.id and transactions.id, and timestamps for auditing.
             $table->id();
             $table->foreignId('tag_id')
-            ->constrained('tags')
-            ->restrictOnDelete();
+                ->constrained('tags')
+                ->restrictOnDelete();
             $table->foreignId('transaction_id')
-            ->constrained('transactions')
-            ->restrictOnDelete();
+                ->constrained('transactions')
+                ->restrictOnDelete();
             $table->timestamps();
         });
     }
